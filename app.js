@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 const helmet = require('helmet');
 const auth = require('./middlewares/auth');
+const cors = require('./middlewares/cors');
 const { login, createUser } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT, DB_CONN } = require('./utils/config');
@@ -14,6 +15,7 @@ app.use(helmet());
 app.use(limiter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors);
 app.use(requestLogger);
 
 app.post('/signin', celebrate({
