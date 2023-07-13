@@ -6,4 +6,4 @@
 
 IP 158.160.31.31
 
-Frontend https://education-project.nomoreparties.sbs
+Backend https://api.diploma-project.nomoredomains.work
