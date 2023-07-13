@@ -1,7 +1,7 @@
-const rateLimit = require('express-rate-limit')
+const rateLimit = require('express-rate-limit');
 
 const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 minutes
+  windowMs: 15 * 60 * 1000, // 15 minutes
   max: 200, // Limit each IP
   standardHeaders: true,
   legacyHeaders: false,
