@@ -1,11 +1,11 @@
 const { NODE_ENV, JWT_SECRET } = process.env;
-const User = require('../models/user');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError'); // 404
 const BadRequestError = require('../errors/BadRequestError'); // 400
 const ConflictError = require('../errors/ConflictError'); // 409
+const UnauthorizedError = require('../errors/UnauthorizedError'); // 401
 
 const getCurentUser = (req, res, next) => {
   User.findById(req.user._id)
@@ -29,7 +29,7 @@ const updateUser = (req, res, next) => {
   })
     .then((user) => {
       if (user === null) {
-        next(new NotFoundError('Запрашиваемый пользователь не найден'));
+        next(new UnauthorizedError('Проблема с авторизацией'));
         return;
       }
       res.send(user);

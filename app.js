@@ -2,13 +2,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
+const helmet = require('helmet');
 const auth = require('./middlewares/auth');
 const { login, createUser } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
-const { PORT = 3000 } = process.env;
+const { PORT, DB_CONN } = require('./utils/config');
+const limiter = require('./utils/rateLimit');
 
 const app = express();
+app.use(helmet());
+app.use(limiter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
@@ -32,7 +35,7 @@ app.use(auth);
 app.use('/users', require('./routes/users'));
 app.use('/movies', require('./routes/movies'));
 
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {
+mongoose.connect(DB_CONN, {
   useNewUrlParser: true,
 });
 app.use(errorLogger);

@@ -4,7 +4,7 @@ const BadRequestError = require('../errors/BadRequestError'); // 400
 const ForbiddenError = require('../errors/ForbiddenError'); // 403
 
 const getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user._id })
     .then((movies) => {
       res.send(movies);
     })
@@ -41,7 +41,7 @@ const createMovie = (req, res, next) => {
 };
 
 const deleteMovie = (req, res, next) => {
-  Movie.findByIdAndRemove(req.params._id)
+  Movie.findById(req.params._id)
     .then((movie) => {
       if (movie === null) {
         next(new NotFoundError('Фильм с указанным _id не найден'));
