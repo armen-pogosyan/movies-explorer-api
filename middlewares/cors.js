@@ -1,6 +1,6 @@
 const allowedCors = [
-  'https://education-project.nomoreparties.sbs',
-  'http://education-project.nomoreparties.sbs',
+  'https://diploma-project.nomoreparties.co',
+  'http://diploma-project.nomoreparties.co',
   'http://localhost:3000',
 ];
 
