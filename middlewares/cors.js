@@ -1,6 +1,7 @@
 const allowedCors = [
   'https://education-project.nomoreparties.sbs',
   'http://education-project.nomoreparties.sbs',
+  'http://localhost:3000',
 ];
 
 // eslint-disable-next-line consistent-return
