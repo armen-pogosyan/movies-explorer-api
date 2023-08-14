@@ -4,12 +4,7 @@ const BadRequestError = require('../errors/BadRequestError'); // 400
 const ForbiddenError = require('../errors/ForbiddenError'); // 403
 
 const getMovies = (req, res, next) => {
-  // Movie.find({ owner: req.user._id })
-  //   .then((movies) => {
-  //     res.send(movies);
-  //   })
-  //   .catch(next);
-  Movie.deleteMany({})
+  Movie.find({ owner: req.user._id })
     .then((movies) => {
       res.send(movies);
     })
